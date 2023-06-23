@@ -1,0 +1,61 @@
+/* css for maintenance page */
+.maintenance {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #ddd;
+}
+.maintenance h1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.maintenance p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.maintenance .btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none;
+}
+.maintenance .btn:hover {
+    background-color: #ddd;
+}
+.maintenance .btn:active {
+    background-color: #ccc;
+}
+.maintenance .btn:focus {
+    outline: none;
+}
+.maintenance .btn-primary {
+    background-color: #337ab7;
+    color: #fff;
+    border-color: #2e6da4;
+}
+.maintenance .btn-primary:hover {
+    background-color: #286090;
+    border-color: #204d74;
+}
+.maintenance .btn-primary:active {
+    background-color: #204d74;
+    border-color: #122b40;
+}
+.maintenance .btn-primary:focus {
+    outline: none;
+}
+.maintenance .btn-danger {
+    background-color: #d9534f;
+    color: #fff;
+    border-color: #d43f3a;
+}
+.maintenance .btn-danger:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+}

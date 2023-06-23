@@ -1,0 +1,18 @@
+RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^([^.]+)$ .php [NC,L]
+
+# ErrorDocument 500 "Houston, we have a problem."
+# ErrorDocument 401 http://error.example.com/mordor.html
+# ErrorDocument 404 /errors/halflife3.html
+
+RewriteRule ^robots.txt - [L]
+
+# maintenance
+# RewriteCond %{REMOTE_ADDR} !^123\.456\.789\.000
+# RewriteCond %{REQUEST_URI} !^/maintenance\.html$
+# RewriteRule ^(.*)$ maintenance\maintenance.html [R=307,L]
+
+# delete index.php
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+# RewriteRule ^index\.php$ http://www.example.com/ [R=301,L]

@@ -1,0 +1,37 @@
+admin
+
+eCommerce
+- catalog
+
+- sales
+
+- customers
+
+- settings
+
+invoice
+- view
+- create
+
+
+customer
+
+product thêm:
+- thumbnail
+
+brand thêm:
+- thumbnail
+
+product_type thêm:
+- thumbnail
+
+store_detail
+- map varchar(255)
+
+pages
+- 
+
+
+Inactive
+Published
+Scheduled

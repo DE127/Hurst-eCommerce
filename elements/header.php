@@ -77,63 +77,59 @@ if (isset($_POST['delete'])) {
 					<div class="mini-cart text-end">
 						<ul>
 							<?php
-							// kiểm tra xem có sản phẩm trong giỏ hàng hay không
-							// nếu có thì hiển thị số lượng sản phẩm
-							// nếu không thì hiển thị 0
-							if(isset($_SESSION['cart'])) {
+							if (isset($_SESSION['cart'])) {
 								$totalitem = 0;
-								foreach($_SESSION['cart'] as $product) {
+								$total = 0;
+								foreach ($_SESSION['cart'] as $product) {
 									$totalitem += $product['quantity'];
+									$total += $product['price'] * $product['quantity'];
 								}
 								echo '<li>
-								<a class="cart-icon" href="#"><i class="zmdi zmdi-shopping-cart"></i><span>'.$totalitem.'</span>
-								</a>
-								
-								';
-							} else {
-								echo '<li><a class="cart-icon" href="#"><i class="zmdi zmdi-shopping-cart"></i><span>0</span></a>';
-							}
-
-							?>
-							<li>
 								<a class="cart-icon" href="#">
 									<i class="zmdi zmdi-shopping-cart"></i>
-									<span><?php $totalitem = 0; foreach($_SESSION['cart'] as $product) { $totalitem += $product['quantity'];}echo $totalitem;?></span>
+									<span>' . $totalitem . '</span>
 								</a>
 								<div class="mini-cart-brief text-left">
 									<div class="cart-items">
-										<p class="mb-0">You have <span><?php $totalitem = 0; foreach($_SESSION['cart'] as $product) { $totalitem += $product['quantity'];}echo $totalitem;?> items</span> in your shopping bag</p>
+										<p class="mb-0">You have <span>' . $totalitem . ' items</span> in your shopping bag</p>
 									</div>
-									<?php foreach ($_SESSION['cart'] as $product): ?>
-									<div class="all-cart-product clearfix">
+									<div class="all-cart-product clearfix">';
+								foreach ($_SESSION['cart'] as $product) {
+									echo '
 										<div class="single-cart clearfix">
 											<div class="cart-photo">
 												<a href="#"><img src="img/cart/1.jpg" alt="" /></a>
 											</div>
 											<div class="cart-info">
-												<h5><a href="#"><?php echo $product['name']; ?></a></h5>
-												<p class="mb-0">Price : $ <?php echo $product['price'] * $product['quantity']; ?></p>
-												<p class="mb-0">Qty : <?php echo $product['quantity']; ?> </p>
+												<h5><a href="#">' . $product['name'] . '</a></h5>
+												<p class="mb-0">Price : $ <' . $product['price'] * $product['quantity'] . '</p>
+												<p class="mb-0">Qty : ' . $product['quantity'] . '</p>
 												<form method="post" action="">
-													<input type="hidden" name="id" value="<?php echo $product['id']; ?>">
+													<input type="hidden" name="id" value="' . $product['id'] . '">
 													<button type="submit" name="update" class="btn"><i
 															class="zmdi zmdi-close"></i></button>
 												</form>
 											</div>
 										</div>
-									</div>
-									<?php endforeach; ?>
-									<div class="cart-totals">
-										<h5 class="mb-0">Total: <span class="floatright"> $ <?php $total = 0; foreach($_SESSION['cart'] as $product) { $total += $product['price'] * $product['quantity'];}echo $total;?>.00</span></h5>
-									</div>
-									<div class="cart-bottom  clearfix">
-										<a href="cart.html" class="button-one floatleft text-uppercase"
-											data-text="View cart">View cart</a>
-										<a href="checkout.html" class="button-one floatright text-uppercase"
-											data-text="Check out">Check out</a>
-									</div>
+									';
+								}
+								;
+								echo '</div><div class="cart-totals">
+									<h5 class="mb-0">Total: <span class="floatright"> $ ' . $total . '.00</span></h5>
 								</div>
-							</li>
+								<div class="cart-bottom  clearfix">
+									<a href="cart.html" class="button-one floatleft text-uppercase"
+										data-text="View cart">View cart</a>
+									<a href="checkout.html" class="button-one floatright text-uppercase"
+										data-text="Check out">Check out</a>
+								</div>
+							</div>
+						</li>';
+							} else {
+								echo '<li><a class="cart-icon" href="#"><i class="zmdi zmdi-shopping-cart"></i><span>0</span></a>';
+							}
+
+							?>
 						</ul>
 					</div>
 				</div>
@@ -151,34 +147,46 @@ if (isset($_POST['delete'])) {
 			<ul>
 				<li><a href="index.php">home</a>
 				</li>
-				<li><a href="shop.html">products</a>
+				<li><a href="product-list.php">products</a>
 					<div class="mega-menu menu-scroll">
 						<div class="table">
 							<div class="table-cell">
 								<div class="half-width">
 									<ul>
-										<li class="menu-title">best brands</li>
-										<li><a href="#">henning koppel</a></li>
-										<li><a href="#">jehs + Laub</a></li>
-										<li><a href="#">vicke lindstrand</a></li>
-										<li><a href="#">don chadwick</a></li>
-										<li><a href="#">akiko kuwahata</a></li>
-										<li><a href="#">barbro berlin</a></li>
-										<li><a href="#">cecilia hall</a></li>
-										<li><a href="#">don chadwick</a></li>
+										<li class="menu-title">popular Brands</li>
+										<?php
+										$sql = "SELECT * FROM brand";
+										$result = mysqli_query($conn, $sql);
+										if (mysqli_num_rows($result) > 0) {
+											while ($row = mysqli_fetch_assoc($result)) {
+												$sql2 = "SELECT COUNT(*) AS total FROM product WHERE brand_id = " . $row['id'];
+												$result2 = mysqli_query($conn, $sql2);
+												$row2 = mysqli_fetch_assoc($result2);
+												echo '<li><a href="product-list.php?brandID=' . $row['id'] . '"><span></span>' . $row['name'] . '<span
+												class="count">' . $row2['total'] . '</span></a></li>';
+											}
+										} else {
+											echo '<li><a href="#">No Brands</a></li>';
+										}
+										?>
 									</ul>
 								</div>
 								<div class="half-width">
 									<ul>
 										<li class="menu-title">popular calatories</li>
-										<li><a href="#">akiko kuwahata</a></li>
-										<li><a href="#">barbro berlin</a></li>
-										<li><a href="#">cecilia hall</a></li>
-										<li><a href="#">don chadwick</a></li>
-										<li><a href="#">henning koppel</a></li>
-										<li><a href="#">jehs + Laub</a></li>
-										<li><a href="#">vicke lindstrand</a></li>
-										<li><a href="#">don chadwick</a></li>
+										<?php
+
+									$sql = "SELECT * FROM product_type";
+									$result = mysqli_query($conn, $sql);
+									if (mysqli_num_rows($result) > 0) {
+										while ($row = mysqli_fetch_assoc($result)) {
+											echo '<li><span><a href="product-list.php?category=' . $row['name'] . '">' . $row['name'] . '<a></span>';
+											echo '</li>';
+										}
+									} else {
+										echo '<li><a href="#">No calatories</a></li>';
+									}
+									?>
 									</ul>
 								</div>
 								<div class="full-width">
@@ -191,25 +199,7 @@ if (isset($_POST['delete'])) {
 						</div>
 					</div>
 				</li>
-				<li><a href="shop-sidebar.html">accesories</a></li>
-				<li><a href="shop-list.html">lookbook</a></li>
-				<li><a href="#">pages</a>
-					<div class="sub-menu menu-scroll">
-						<ul>
-							<li class="menu-title">Page's</li>
-							<li><a href="shop-sidebar.html">Shop Sidebar</a></li>
-							<li><a href="shop-list.html">Shop List</a></li>
-							<li><a href="single-product.html">Single Product</a></li>
-							<li><a href="single-product-sidebar.html">Single Product Sidebar</a></li>
-							<li><a href="cart.html">Shopping Cart</a></li>
-							<li><a href="wishlist.html">Wishlist</a></li>
-							<li><a href="checkout.html">Checkout</a></li>
-							<li><a href="order.html">Order</a></li>
-							<li><a href="login.html">login / Registration</a></li>
-							<li><a href="my-account.html">My Account</a></li>
-						</ul>
-					</div>
-				</li>
+				<li><a href="product-list.php">accesories</a></li>
 				<li><a href="about.html">about us</a></li>
 				<li><a href="contact.html">contact</a></li>
 			</ul>

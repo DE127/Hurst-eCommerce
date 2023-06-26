@@ -68,13 +68,35 @@ include_once 'config\conn.php';
 							<div class="widget-info">
 								<div class="price_filter">
 									<div class="price_slider_amount">
-										<input type="submit" value="You range :" />
-										<input type="text" id="amount" name="price" placeholder="Add Your Price" />
+										<!-- range price form in html -->
+										<!-- code -->
+											<!-- <input type="submit" value="You range :" />
+											<input type="text" id="amount" name="price" placeholder="Add Your Price" /> -->
+
+										<form action="" method="post">
+											<input type="number" min="0" step="100" max="5000" name="min_price" value="50">
+											<input type="number" min="0" step="100" max="5000" name="max_price" value="1000">
+											<button type="submit">Search</button>
+										</form>
+										<?php
+										// tìm kiểm dựa theo khoảng giá của sản phẩm
+										$min_price = $_GET['min_price'];
+										$max_price = $_GET['max_price'];
+										$sql = "SELECT * FROM product WHERE price_out BETWEEN :min_price AND :max_price";
+										$stmt = $conn->prepare($sql);
+										$stmt->bindParam(':min_price', $min_price);
+										$stmt->bindParam(':max_price', $max_price);
+										$stmt->execute();
+										foreach ($products as $product) {
+											echo $product['name'] . ': ' . $product['price'] . '<br>';
+										}
+										?>
 									</div>
 									<div id="slider-range"></div>
 								</div>
 							</div>
 						</aside>
+
 						<aside class="widget widget-color mb-30">
 							<div class="widget-title">
 								<h4>Brands</h4>
@@ -90,7 +112,7 @@ include_once 'config\conn.php';
 											$sql2 = "SELECT COUNT(*) AS total FROM product WHERE brand_id = " . $row['id'];
 											$result2 = mysqli_query($conn, $sql2);
 											$row2 = mysqli_fetch_assoc($result2);
-											echo '<li><a href="?brandID='. $row['id'] .'"><span></span>' . $row['name'] . '<span
+											echo '<li><a href="?brandID=' . $row['id'] . '"><span></span>' . $row['name'] . '<span
 												class="count">' . $row2['total'] . '</span></a></li>';
 										}
 									} else {
@@ -250,7 +272,7 @@ include_once 'config\conn.php';
 										}
 
 										// lấy sản phẩm theo giá
-
+										
 										// lấy sản phẩm theo thương hiệu
 										if (isset($_GET['brandID'])) {
 											$brandID = $_GET['brandID'];

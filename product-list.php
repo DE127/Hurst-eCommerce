@@ -68,31 +68,14 @@ include_once 'config\conn.php';
 							<div class="widget-info">
 								<div class="price_filter">
 									<div class="price_slider_amount">
-										<!-- range price form in html -->
-										<!-- code -->
-											<!-- <input type="submit" value="You range :" />
-											<input type="text" id="amount" name="price" placeholder="Add Your Price" /> -->
-
-										<form action="" method="post">
-											<input type="number" min="0" step="100" max="5000" name="min_price" value="50">
-											<input type="number" min="0" step="100" max="5000" name="max_price" value="1000">
+										<form action="" method="GET">
+											<input type="number" min="0" step="50" max="5000" name="min-price"
+												placeholder="50$">
+											<input type="number" min="0" step="100" max="5000" name="max-price"
+												placeholder="1000$">
 											<button type="submit">Search</button>
 										</form>
-										<?php
-										// tìm kiểm dựa theo khoảng giá của sản phẩm
-										$min_price = $_GET['min_price'];
-										$max_price = $_GET['max_price'];
-										$sql = "SELECT * FROM product WHERE price_out BETWEEN :min_price AND :max_price";
-										$stmt = $conn->prepare($sql);
-										$stmt->bindParam(':min_price', $min_price);
-										$stmt->bindParam(':max_price', $max_price);
-										$stmt->execute();
-										foreach ($products as $product) {
-											echo $product['name'] . ': ' . $product['price'] . '<br>';
-										}
-										?>
 									</div>
-									<div id="slider-range"></div>
 								</div>
 							</div>
 						</aside>
@@ -189,6 +172,59 @@ include_once 'config\conn.php';
 													echo '<div class="col-lg-4 col-md-6">
 															<div class="single-product">
 																<div class="product-img">
+																<span class="pro-price-2">$ ' . $row['price_out'] . '
+																	</span>
+																	<a href="single-product.html"><img src="admin/' . $row['thumbnail'] . '" alt="" style="height:270px" />
+																	</a>
+																</div>
+																<div class="product-info clearfix text-center">
+																	<div class="fix">
+																		<h4 class="post-title"><a href="product.php?product=' . $row['id'] . '">' . $row['name'] . '</a>
+																		</h4>
+																	</div>
+																	<div class="fix">
+																	</div>
+																	<div class="product-action clearfix">
+																		<a href="wishlist.html" data-bs-toggle="tooltip"
+																			data-placement="top" title="Wishlist"><i
+																				class="zmdi zmdi-favorite-outline"></i></a>
+																		<a href="#" data-bs-toggle="modal" data-bs-target="#productModal"
+																			title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
+																		<a href="#" data-bs-toggle="tooltip" data-placement="top"
+																			title="Compare"><i class="zmdi zmdi-refresh"></i></a>
+																		<form method="post" action="">
+																		<input type="hidden" name="product_id" value="' . $row['id'] . '">
+																		<input type="hidden" name="product_quantity" value="1">
+																		<input type="hidden" name="product_name" value="' . $row['name'] . '">
+																		<input type="hidden" name="product_price" value="' . $row['price_out'] . '">
+																		<button type="submit" class="btn" name="add-to-cart">
+																		<i class="zmdi zmdi-shopping-cart-plus"></i>
+																		</button>
+																		</form>
+																	</div>
+																</div>
+															</div>
+														</div>';
+												}
+											} else {
+												echo '<div style="padding: 30px"><h2 style="text-align: center;">0 results</h2></div>';
+											}
+										}
+
+										// lấy sản phẩm theo giá
+										if (isset($_GET['min-price']) && isset($_GET['max-price'])) {
+											// tìm kiểm dựa theo khoảng giá của sản phẩm
+											$min_price = $_GET['min-price'];
+											$max_price = $_GET['max-price'];
+											$sql = "SELECT * FROM product WHERE price_out BETWEEN $min_price AND $max_price";
+											// query sql
+											$result = mysqli_query($conn, $sql);
+											// fetch data
+											if (mysqli_num_rows($result) > 0) {
+												while ($row = mysqli_fetch_assoc($result)) {
+													echo '<div class="col-lg-4 col-md-6">
+															<div class="single-product">
+																<div class="product-img">
 																	<span class="pro-price-2">$ ' . $row['price_out'] . '</span>
 																	<a href="single-product.html"><img src="admin/' . $row['thumbnail'] . '" alt="" style="height:270px" /></a>
 																</div>
@@ -271,8 +307,6 @@ include_once 'config\conn.php';
 											}
 										}
 
-										// lấy sản phẩm theo giá
-										
 										// lấy sản phẩm theo thương hiệu
 										if (isset($_GET['brandID'])) {
 											$brandID = $_GET['brandID'];

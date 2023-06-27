@@ -9,12 +9,19 @@ if (isset($_POST['add-to-cart'])) {
 	$product_price = $_POST['product_price'];
 	$product_quantity = $_POST['product_quantity'];
 
+	// thumbnail
+	$sql = "SELECT * FROM product WHERE id = " . $product_id;
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+	$product_thumbnail = $row['thumbnail'];
+
 	// Tạo mảng chứa thông tin sản phẩm
 	$product = array(
 		'id' => $product_id,
 		'name' => $product_name,
 		'price' => $product_price,
-		'quantity' => $product_quantity
+		'quantity' => $product_quantity,
+		'thumbnail' => $product_thumbnail
 	);
 	// Thêm sản phẩm vào giỏ hàng
 	if (isset($_SESSION['cart'])) {
@@ -98,11 +105,11 @@ if (isset($_POST['delete'])) {
 									echo '
 										<div class="single-cart clearfix">
 											<div class="cart-photo">
-												<a href="#"><img src="img/cart/1.jpg" alt="" /></a>
+												<a href="product.php?product=' . $product['id'] . '"><img src="admin/' . $product['thumbnail'] . '" alt="" /></a>
 											</div>
 											<div class="cart-info">
 												<h5><a href="#">' . $product['name'] . '</a></h5>
-												<p class="mb-0">Price : $ <' . $product['price'] * $product['quantity'] . '</p>
+												<p class="mb-0">Price : $ ' . $product['price'] * $product['quantity'] . '</p>
 												<p class="mb-0">Qty : ' . $product['quantity'] . '</p>
 												<form method="post" action="">
 													<input type="hidden" name="id" value="' . $product['id'] . '">
@@ -118,9 +125,9 @@ if (isset($_POST['delete'])) {
 									<h5 class="mb-0">Total: <span class="floatright"> $ ' . $total . '.00</span></h5>
 								</div>
 								<div class="cart-bottom  clearfix">
-									<a href="cart.html" class="button-one floatleft text-uppercase"
+									<a href="cart.php" class="button-one floatleft text-uppercase"
 										data-text="View cart">View cart</a>
-									<a href="checkout.html" class="button-one floatright text-uppercase"
+									<a href="checkout.php" class="button-one floatright text-uppercase"
 										data-text="Check out">Check out</a>
 								</div>
 							</div>

@@ -135,6 +135,9 @@ CREATE TABLE `order` (
   `payment_method_id` int(11) NOT NULL,
   `shipping_method_id` int(11) NOT NULL,
   `total` int(11) NOT NULL,
+  `vat` int(11) NOT NULL,
+  `subTotal` int(11) NOT NULL,
+  `orderTotal` int(11) NOT NULL,
   `status` tinyint(4) DEFAULT '0',
   `date_update` timestamp NOT NULL,
   `email` varchar(255),
@@ -214,3 +217,5 @@ ADD CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order`
   ADD CONSTRAINT `order_detail_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `product_detail`
 ADD CONSTRAINT `product_detail_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+

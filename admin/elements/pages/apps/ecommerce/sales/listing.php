@@ -140,6 +140,7 @@ $result = mysqli_query($conn, $query);
 									$id = $row['customer_id'];
 									$customer = mysqli_query($conn, "SELECT * FROM customer WHERE id = '$id' LIMIT 1");
 									$row2 = mysqli_fetch_assoc($customer);
+                                    $row2['avatar'] = str_replace('admin/', '', $row2['avatar']);
 								echo '<tr>
 									<td>
 										<div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -159,7 +160,7 @@ $result = mysqli_query($conn, $query);
 												</a>
 											</div>
 											<div class="ms-5">
-												<a href="?action=customers&query=details&id='. $row2['id'] .'" class="text-gray-800 text-hover-primary fs-5 fw-bold">'. $row['fullname'] .'</a>
+												<a href="?action=customers&query=details&id='. $row2['id'] .'" class="text-gray-800 text-hover-primary fs-5 fw-bold">'. $row2['fullname'] .'</a>
 											</div>
 										</div>
 									</td>';

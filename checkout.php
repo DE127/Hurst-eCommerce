@@ -27,17 +27,18 @@ include_once 'config\conn.php';
 			$phone = $_POST['phone'];
 			$address = $_POST['address'];
 			$payment_method_id = $_POST['payment_method_id'];
+			$shipping_method_id = $_POST['shipping_method_id'];
 			$customer_id = $_SESSION['customer_id'];
 			// subTotal, vat, total, orderTotal
 			$subTotal = $_POST['subTotal'];
 			$vat = $_POST['vat'];
 			$total = $_POST['total'];
 			$orderTotal = $_POST['orderTotal'];
-			echo '1';
-			$sql = "INSERT INTO `order`(`email`, `phone`, `address`, `payment_method_id`, `customer_id`, `total`, `subTotal`, `vat`, `orderTotal`) VALUES ('$email','$phone','$address','$payment_method_id','$customer_id', '$total', '$subTotal', '$vat', '$orderTotal')";
+			$sql = "INSERT INTO `order`(`email`, `phone`, `address`, `payment_method_id`, `customer_id`, `total`, `subTotal`, `vat`, `orderTotal`, `shipping_method_id`) VALUES ('$email','$phone','$address','$payment_method_id','$customer_id', '$total', '$subTotal', '$vat', '$orderTotal', '$shipping_method_id')";
 			$result = mysqli_query($conn, $sql);
 			if ($result) {
-				echo '3';
+				// làm sạch giỏ hàng
+				unset($_SESSION['cart']);
 				echo '<script>alert("Order successfully!")</script>';
 			} else {
 				echo '4';
@@ -84,7 +85,6 @@ include_once 'config\conn.php';
 							<div class="tab-content">
 								<!-- check-out start -->
 								<div class="tab-pane active" id="check-out">
-									<form action="#">
 										<div class="shop-cart-table check-out-wrap">
 											<div class="row">
 												<div class="col-md-6">
@@ -180,7 +180,7 @@ include_once 'config\conn.php';
 												<!-- payment-method -->
 												<div class="col-md-6">
 													<div class="payment-method mt-60  pl-20">
-														<h4 class="title-1 title-border text-uppercase mb-30">payment
+														<h4 class="title-1 title-border text-uppercase mb-30">payment and shipping
 															method</h4>
 														<div class="payment-accordion">
 															<form action="" method="post" enctype="multipart/form-data">
@@ -210,6 +210,17 @@ include_once 'config\conn.php';
 																	}
 																?>
 																</select>
+																<select class="custom-select mb-15"
+																	name="shipping_method_id">
+																<?php
+																	// get all payment methods
+																	$sql = "SELECT * FROM shipping_method where status > 0";
+																	$result = mysqli_query($conn, $sql);
+																	while ($row = mysqli_fetch_assoc($result)) {
+																		echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
+																	}
+																?>
+																</select>
 																<?php
 																$orderTotal = $total + $subTotal + $vat;
 																if (isset($_SESSION['cart'])) {
@@ -233,7 +244,6 @@ include_once 'config\conn.php';
 												</div>
 											</div>
 										</div>
-									</form>
 								</div>
 								<!-- check-out end -->
 							</div>

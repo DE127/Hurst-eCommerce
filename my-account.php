@@ -25,7 +25,6 @@ include_once 'config\conn.php';
 		if (isset($_POST['btn-save-info'])) {
 			// Clean user inputs to prevent SQL injection
 			$fullname = trim($_POST['fullname']);
-			$username = trim($_POST['username']);
 			$phone = trim($_POST['phone']);
 			$address = trim($_POST['address']);
 			$birthday = trim($_POST['birthday']);
@@ -86,8 +85,8 @@ include_once 'config\conn.php';
 					// Thêm thông tin cửa hàng vào cơ sở dữ liệu
 					if ($conn->query($query) === true) {
 						// reload lại trang để hiển thị thông tin mới bằng js
-						echo '<script>
-                window.location.href = "my-account.php";
+					echo '<script>
+                // window.location.href = "my-account.php";
                 console.log("Information updated successfully");
                 </script>';
 					} else {

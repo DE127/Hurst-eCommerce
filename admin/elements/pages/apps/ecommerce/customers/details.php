@@ -7,6 +7,9 @@ $row = mysqli_fetch_assoc($result);
 if ($row['avatar'] == '') {
 	$row['avatar'] = 'uploads/avatars/default.jpg';
 }
+
+// delete admin/ in url avatar
+$row['avatar'] = str_replace('admin/', '', $row['avatar']);
 ?>
 <!--begin::Main-->
 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">

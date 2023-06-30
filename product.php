@@ -126,7 +126,8 @@ $row3 = $row;
 								<div class="clearfix">
 									<form method="post" action="">
 										<div class="cart-plus-minus">
-											<input type="text" value="02" name="product_quantity" class="cart-plus-minus-box">
+											<input type="text" value="02" name="product_quantity"
+												class="cart-plus-minus-box">
 										</div>
 										<div class="product-action clearfix">
 											<a href="wishlist.html" data-bs-toggle="tooltip" data-placement="top"
@@ -136,8 +137,10 @@ $row3 = $row;
 											<a href="#" data-bs-toggle="tooltip" data-placement="top" title="Compare"><i
 													class="zmdi zmdi-refresh"></i></a>
 											<input type="hidden" name="product_id" value="<?php echo $row3['id'] ?>">
-											<input type="hidden" name="product_name" value="<?php echo $row3['name'] ?>">
-											<input type="hidden" name="product_price" value="<?php echo $row3['price_out'] ?>">
+											<input type="hidden" name="product_name"
+												value="<?php echo $row3['name'] ?>">
+											<input type="hidden" name="product_price"
+												value="<?php echo $row3['price_out'] ?>">
 											<button type="submit" class="btn" name="add-to-cart"><i
 													class="zmdi zmdi-shopping-cart-plus"></i></button>
 										</div>
@@ -197,114 +200,7 @@ $row3 = $row;
 									</div>
 								</div>
 								<div class="tab-pane active" id="reviews">
-									<div class="pro-tab-info pro-reviews">
-										<div class="customer-review mb-60">
-											<h3 class="tab-title title-border mb-30">Customer review</h3>
-											<ul class="product-comments clearfix">
-												<li class="mb-30">
-													<div class="pro-reviewer">
-														<img src="img/reviewer/1.jpg" alt="" />
-													</div>
-													<div class="pro-reviewer-comment">
-														<div class="fix">
-															<div class="floatleft mbl-center">
-																<h5 class="text-uppercase mb-0"><strong>Gerald
-																		Barnes</strong></h5>
-																<p class="reply-date">27 Jun, 2021 at 2:30pm</p>
-															</div>
-															<div class="comment-reply floatright">
-																<a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-																<a href="#"><i class="zmdi zmdi-close"></i></a>
-															</div>
-														</div>
-														<p class="mb-0">Lorem ipsum dolor sit amet, consectetur
-															adipiscing elit. Integer accumsan egestas elese ifend.
-															Phasellus a felis at est bibendum feugiat ut eget eni
-															Praesent et messages in con sectetur posuere dolor non.</p>
-													</div>
-												</li>
-												<li class="threaded-comments">
-													<div class="pro-reviewer">
-														<img src="img/reviewer/1.jpg" alt="" />
-													</div>
-													<div class="pro-reviewer-comment">
-														<div class="fix">
-															<div class="floatleft mbl-center">
-																<h5 class="text-uppercase mb-0"><strong>Gerald
-																		Barnes</strong></h5>
-																<p class="reply-date">27 Jun, 2021 at 2:30pm</p>
-															</div>
-															<div class="comment-reply floatright">
-																<a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-																<a href="#"><i class="zmdi zmdi-close"></i></a>
-															</div>
-														</div>
-														<p class="mb-0">Lorem ipsum dolor sit amet, consectetur
-															adipiscing elit. Integer accumsan egestas elese ifend.
-															Phasellus a felis at est bibendum feugiat ut eget eni
-															Praesent et messages in con sectetur posuere dolor non.</p>
-													</div>
-												</li>
-											</ul>
-										</div>
-										<div class="leave-review">
-											<h3 class="tab-title title-border mb-30">Leave your reviw</h3>
-											<div class="your-rating mb-30">
-												<p class="mb-10"><strong>Your Rating</strong></p>
-												<span>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-												</span>
-												<span class="separator">|</span>
-												<span>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-												</span>
-												<span class="separator">|</span>
-												<span>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-												</span>
-												<span class="separator">|</span>
-												<span>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-												</span>
-												<span class="separator">|</span>
-												<span>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-													<a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-												</span>
-											</div>
-											<div class="reply-box">
-												<form action="#">
-													<div class="row">
-														<div class="col-md-6">
-															<input type="text" placeholder="Your name here..."
-																name="name" />
-														</div>
-														<div class="col-md-6">
-															<input type="text" placeholder="Subject..." name="name" />
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-md-12">
-															<textarea class="custom-textarea" name="message"
-																placeholder="Your review here..."></textarea>
-															<button type="submit" data-text="submit review"
-																class="button-one submit-button mt-20">submit
-																review</button>
-														</div>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
+									<iframe class="pro-tab-info pro-description" height="800px" width="100%" src="comment.php?product_id=<?= $_GET['product']; ?>"></iframe>
 								</div>
 								<div class="tab-pane" id="information">
 									<div class="pro-tab-info pro-information">

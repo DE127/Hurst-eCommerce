@@ -40,4 +40,6 @@
 	<link rel="stylesheet" href="css/responsive.css">
 	<!-- modernizr css -->
 	<script src="js/vendor/modernizr-3.11.2.min.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>

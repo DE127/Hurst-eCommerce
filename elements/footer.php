@@ -4,6 +4,7 @@ $sql = "SELECT * FROM store_detail";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 ?>
+
 <footer>
     <!-- Footer-area start -->
     <div class="footer-area footer-2">
@@ -13,10 +14,18 @@ $row = mysqli_fetch_assoc($result);
                     <div class="single-footer">
                         <h3 class="footer-title  title-border">Contact Us</h3>
                         <ul class="footer-contact">
-                            <li><span>Address :</span><?php echo $row['address'] ?></li>
-                            <li><span>Cell-Phone :</span><?php echo $row['phone'] ?></li>
-                            <li><span>Email :</span><?php echo $row['email'] ?></li>
-                            <li><span>Email :</span><?php echo $row['facebook'] ?></li>
+                            <li><span>Address :</span>
+                                <?php echo $row['address'] ?>
+                            </li>
+                            <li><span>Cell-Phone :</span>
+                                <?php echo $row['phone'] ?>
+                            </li>
+                            <li><span>Email :</span>
+                                <?php echo $row['email'] ?>
+                            </li>
+                            <li><span>Email :</span>
+                                <?php echo $row['facebook'] ?>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -67,7 +76,7 @@ $row = mysqli_fetch_assoc($result);
                 <div class="col-md-6">
                     <div class="copyright">
                         <p class="mb-0">&copy; <a href="https://github.com/DE127" rel="nofollow
-                                target="_blank">DE127 </a> 2023. All Rights Reserved.</p>
+                                target=" _blank">DE127 </a> 2023. All Rights Reserved.</p>
                     </div>
                 </div>
                 <div class="col-md-6">

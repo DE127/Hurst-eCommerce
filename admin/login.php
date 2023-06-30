@@ -1,6 +1,8 @@
 <!-- hàm php login with password_hash()-->
 <?php
 session_start();
+include_once(__DIR__ . "/../security/config.php");
+include_once(__DIR__ . "/../security/project-security.php");
 require_once 'config/config.php';
 
 if (isset($_POST['login'])) {

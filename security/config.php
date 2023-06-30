@@ -2,7 +2,7 @@
 $host     = "localhost"; // Database Host
 $user     = "root"; // Database Username
 $password = ""; // Database's user Password
-$database = "security"; // Database Name
+$database = "hurst_ecm"; // Database Name
 
 $mysqli = new mysqli($host, $user, $password, $database);
 

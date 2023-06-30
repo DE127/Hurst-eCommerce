@@ -7,7 +7,7 @@
   'project_security' => 1,
   'mail_notifications' => 0,
   'test_integration' => 0,
-  'dark_mode' => 0,
+  'dark_mode' => 1,
   'countryban_blacklist' => 1,
   'live_traffic' => 1,
   'badword_replace' => '[Censored]',
